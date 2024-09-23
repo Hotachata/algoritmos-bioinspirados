@@ -10,6 +10,9 @@ costos = []
 # listas de probabilidades y probabilidades acumuladas
 probabilidades = []
 probabilidades_ac = []
+# padres 1 y 2
+padre1 = []
+padre2 = []
 
 # CREAMOS individuos con genes aleatorios
 def genera_individuo():
@@ -36,7 +39,7 @@ def restriccion(individuo):
                 individuo.count(7)*1])
 
 # CREAMOS la lista de invidiuos considerando las restricciones
-def genera_lista_individuos():
+def genera_lista_individuos(individuos):
     numero_deseado_i = 10
     # generamos un individuo aleatorio
     individuo = genera_individuo()
@@ -45,17 +48,17 @@ def genera_lista_individuos():
         # si el individuo pesa mas del limite (30), se descarta
         if restriccion(individuo)<=30:
             individuos.append(individuo)
-            print(str(individuo) + "\ncuesta: " + str(aptitud(individuo)) + " y pesa: " + str(restriccion(individuo)))
+            # print(str(individuo) + "\ncuesta: " + str(aptitud(individuo)) + " y pesa: " + str(restriccion(individuo)))
     # los individuos que no cumplan las condiciones son descartados (se repite el proceso)
     if len(individuos) < numero_deseado_i:
-        genera_lista_individuos()
+        genera_lista_individuos(individuos)
     else:
-        print("Se han generado suficientes individuos")
+        print("Se han generado suficientes individuos (" + str(len(individuos)) + ")")
 
 # CALCULAMOS la aptitud de cada individuo
 def vector_aptitud(aptitudes, individuos):
-    for i in range(0, 10): 
-        apt = aptitud(individuos[i])  
+    for i in range(1, 11): 
+        apt = aptitud(individuos[i-1])  
         aptitudes.append(apt)  
 
 # CALCULAMOS el costo de cada individuo
@@ -75,17 +78,29 @@ def probabilidad(probabilidades, probabilidades_ac, aptitudes):
         #calculando el vector de probabilidades normales
         probabilidad = aptitudes[i-1] / siu 
         probabilidades.append(probabilidad)
+        
     probabilidad_ac =0
     for i in range(1, 11): 
         #calculando el vector de probabilidades acumuladas
         probabilidad_ac += aptitudes[i-1] / siu 
         probabilidades_ac.append(probabilidad_ac)
-    
+
+def test():
+    # se genera la lista de individuos
+    genera_lista_individuos(individuos)
+
+    # hacemos los vectores de aptitudes y costos
+    vector_aptitud(aptitudes, individuos)
+    vector_costos(costos, individuos)
+
+    print("valores (vector): " + str(aptitudes))
+    print("costos (vector): " + str(costos))
+
+    # calculamos la probabilidad de seleccion y la probabilidad acumulada usando las aptitudes de los individuos
+    probabilidad(probabilidades, probabilidades_ac, aptitudes)
+
+    print("probabilidad de seleccion (vector): " + str(probabilidades))
+    print("probabilidad acumulada (vector): " + str(probabilidades_ac))
 
 
-
-def algoritmo_genetico():
-    print("Algoritmo genetico")
-
-
-genera_lista_individuos()
+test()
