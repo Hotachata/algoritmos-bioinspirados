@@ -4,6 +4,12 @@ random.seed(0)
 
 # lista de individuos
 individuos = []
+# listas de aptitudes y restricciones
+aptitudes = []
+costos = []
+# listas de probabilidades y probabilidades acumuladas
+probabilidades = []
+probabilidades_ac = []
 
 # CREAMOS individuos con genes aleatorios
 def genera_individuo():
@@ -46,9 +52,40 @@ def genera_lista_individuos():
     else:
         print("Se han generado suficientes individuos")
 
-# probabilidad de seleccion
-def probabilidad(individuo):
-    return "woaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaooooooooos"
+# CALCULAMOS la aptitud de cada individuo
+def vector_aptitud(aptitudes, individuos):
+    for i in range(0, 10): 
+        apt = aptitud(individuos[i])  
+        aptitudes.append(apt)  
+
+# CALCULAMOS el costo de cada individuo
+def vector_costos(costos, individuos):
+    for i in range(1, 11): 
+        cst = restriccion(individuos[i-1])  
+        costos.append(cst)  
+
+# CALCULAMOS la probabilidad de seleccion
+def probabilidad(probabilidades, probabilidades_ac, aptitudes):
+    #sumar todas las aptitudes
+    siu = 0
+    for i in range(1, 11): 
+        siu += aptitudes[i-1]
+
+    for i in range(1, 11): 
+        #calculando el vector de probabilidades normales
+        probabilidad = aptitudes[i-1] / siu 
+        probabilidades.append(probabilidad)
+    probabilidad_ac =0
+    for i in range(1, 11): 
+        #calculando el vector de probabilidades acumuladas
+        probabilidad_ac += aptitudes[i-1] / siu 
+        probabilidades_ac.append(probabilidad_ac)
+    
+
+
 
 def algoritmo_genetico():
     print("Algoritmo genetico")
+
+
+genera_lista_individuos()
