@@ -129,6 +129,81 @@ def cruzar(cruza, hijo1, hijo2):
         else:
             hijo2.append(padre1[i])
 
+# algoritmo de mutacion
+def mutar(hijo):
+    for i in range(7):  # Ajustar para que el índice empiece en 0
+        r1 = random.uniform(0,1)
+        if r1 <= .1:
+            if (i == 1):
+                r2 = random.randint(3, 10)
+                hijo[i] = r2
+            elif(i==3):
+                r2 = random.randint(2, 10)
+                hijo[i] = r2
+            else:
+                r2 = random.randint(1, 10)
+                hijo[i] = r2
+
+for i in range(50):
+    #def generacion(padre1, padre2)
+    for i in range(5):  
+        # generar padres
+        padre1, padre2 = ruleta(probabilidades_ac, individuos)
+        # calcular probabilidad de cruza
+        r1 = random.uniform(0,1)
+        if r1 <= .85:
+            # realizar cruza y mutación
+            cruza = genera_elemento_cruza()
+            cruzar(cruza, hijo1, hijo2)
+            mutar(hijo1)
+            mutar(hijo2)
+            while(restriccion(hijo1)>30 or restriccion(hijo2) >30):
+                cruza = genera_elemento_cruza()
+                cruzar(cruza, hijo1, hijo2)
+                mutar(hijo1)
+                mutar(hijo2)
+            
+            if (aptitud(hijo1)>= aptitud(padre1) ):
+                auxiliar.append(hijo1[:])  # Usar append para agregar copias de las listas
+            else:
+                auxiliar.append(padre1[:])
+            if (aptitud(hijo2)>= aptitud(padre2) ):
+                auxiliar.append(hijo2[:]) 
+            else:
+                auxiliar.append(padre2[:])              
+        else:
+            auxiliar.append(padre1[:])
+            auxiliar.append(padre2[:])
+
+    individuos.clear()
+    individuos.extend([individuo[:] for individuo in auxiliar])
+    auxiliar.clear()
+
+    probabilidades.clear()
+    probabilidades_ac.clear()
+    aptitudes.clear()
+    costos.clear()
+    
+    vector_aptitud(aptitudes, individuos)
+    vector_costos(costos, individuos)
+    probabilidad(probabilidades, probabilidades_ac, aptitudes)
+
+    print(individuos)
+    print("fin de la generación")
+
+print("generacion final: ")
+print (individuos)
+mejora = 0
+for i in range (10):
+    m = aptitud(individuos[i])
+    if(m > mejora):
+        mejora = aptitud(individuos[i])
+        mejor  = individuos[i]
+
+print(" el mejor resultado de la ultima generación fue :")
+print(mejor)
+print(restriccion(mejor))
+
 
 def test():
     # se genera la lista de individuos
