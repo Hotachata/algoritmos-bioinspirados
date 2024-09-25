@@ -8,6 +8,12 @@ aptitudes = []
 costos = []
 probabilidades = []
 probabilidades_ac = []
+padre1 = []
+padre2 = []
+hijo1 = []
+hijo2 = []
+cruza = []
+auxiliar = []
 
 # CREAMOS individuos con genes aleatorios
 def genera_individuo():
@@ -76,19 +82,14 @@ probabilidad(probabilidades, probabilidades_ac, aptitudes)
 # print(probabilidades)
 # print(probabilidades_ac)
 
-padre1 = []
-padre2 = []
-hijo1 = []
-hijo2 = []
-cruza = []
-auxiliar = []
+# ALGORITMO GENETICOOOOOOOO
 
 def genera_elemento_cruza():
     return [random.uniform(0,1) for _ in range(7)]
 
-
 def ruleta(probabilidades_ac, individuos):
-    global padre1, padre2  # Hacer uso de variables globales
+    global padre1, padre2  
+    # Hacer uso de variables globales
     # crear dos números al azar
     r1 = random.uniform(0,1)
     r2 = random.uniform(0,1)
@@ -129,8 +130,6 @@ def cruzar(cruza, hijo1, hijo2):
             hijo2.append(padre2[i])
         else:
             hijo2.append(padre1[i])
-    
-    
 
 def mutar(hijo):
     for i in range(7):  # Ajustar para que el índice empiece en 0
@@ -145,8 +144,6 @@ def mutar(hijo):
             else:
                 r2 = random.randint(1, 10)
                 hijo[i] = r2
-    
-
 
 for i in range(50):
     #def generacion(padre1, padre2)
@@ -158,20 +155,27 @@ for i in range(50):
         if r1 <= .85:
             # realizar cruza y mutación
             cruza = genera_elemento_cruza()
+            
             cruzar(cruza, hijo1, hijo2)
+            
+            if restriccion(hijo1) <= 30 and hijo1.count(2) >= 3 and hijo1.count(4) >= 2:
+                individuos.append(hijo1)
+            
             mutar(hijo1)
             mutar(hijo2)
-            while(restriccion(hijo1)>30 or restriccion(hijo2) >30):
+            
+            # mientras el peso sea mayor a 30, volver a cruzar y mutar
+            while(restriccion(hijo1) > 30 or restriccion(hijo2) > 30):
                 cruza = genera_elemento_cruza()
                 cruzar(cruza, hijo1, hijo2)
                 mutar(hijo1)
                 mutar(hijo2)
             
-            if (aptitud(hijo1)>= aptitud(padre1) ):
+            if (aptitud(hijo1) >= aptitud(padre1) ):
                 auxiliar.append(hijo1[:])  # Usar append para agregar copias de las listas
             else:
                 auxiliar.append(padre1[:])
-            if (aptitud(hijo2)>= aptitud(padre2) ):
+            if (aptitud(hijo2) >= aptitud(padre2) ):
                 auxiliar.append(hijo2[:]) 
             else:
                 auxiliar.append(padre2[:])              
