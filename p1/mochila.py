@@ -4,14 +4,18 @@ random.seed(time.time())
 
 # lista de individuos
 individuos = []
+# aptitudes y costos de cada individuo
 aptitudes = []
 costos = []
+# probabilidad de seleccion y acumulada
 probabilidades = []
 probabilidades_ac = []
+# padres e hijos
 padre1 = []
 padre2 = []
 hijo1 = []
 hijo2 = []
+# lista de cruza y auxiliar
 cruza = []
 auxiliar = []
 
