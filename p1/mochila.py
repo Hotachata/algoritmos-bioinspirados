@@ -17,37 +17,37 @@ auxiliar = []
 
 # CREAMOS individuos con genes aleatorios
 def genera_individuo():
-    return [random.randint(1, 10) for _ in range(7)]
+    return [random.randint(0, 10) for _ in range(7)]
 
 # EVALUAMOS la aptitud (costo) de un individuo
 def aptitud(individuo):
-    return sum([individuo.count(1)*10, 
-                individuo.count(2)*8, 
-                individuo.count(3)*12, 
-                individuo.count(4)*6, 
-                individuo.count(5)*3, 
-                individuo.count(6)*2, 
-                individuo.count(7)*2])
+    return sum([individuo[0]*10, 
+                individuo[1]*8, 
+                individuo[2]*12, 
+                individuo[3]*6, 
+                individuo[4]*3, 
+                individuo[5]*2, 
+                individuo[6]*2])
 
 # EVALUAMOS las restricciones (peso) de un individuo
 def restriccion(individuo):
-    return sum([individuo.count(1)*4,
-                individuo.count(2)*2,
-                individuo.count(3)*5,
-                individuo.count(4)*5,
-                individuo.count(5)*2,
-                individuo.count(6)*1.5,
-                individuo.count(7)*1])
+    return sum([individuo[0]*4,
+                individuo[1]*2,
+                individuo[2]*5,
+                individuo[3]*5,
+                individuo[4]*2,
+                individuo[5]*1.5,
+                individuo[6]*1])
 
 # CREAMOS la lista de individuos considerando las restricciones
 def genera_lista_individuos(individuos):
     numero_deseado_i = 10
     while len(individuos) < numero_deseado_i:
         individuo = genera_individuo()
-        if individuo.count(2) >= 3 and individuo.count(4) >= 2 and restriccion(individuo) <= 30:
+        if individuo[1] >= 3 and individuo[3] >= 2 and restriccion(individuo) <= 30:
             individuos.append(individuo)
             # print(f"{individuo}\ncuesta: {aptitud(individuo)} y pesa: {restriccion(individuo)}")
-    print("Se han generado suficientes individuos")
+    print("\nGeneracion inicial: \n" + str(individuos))
 
 def vector_aptitud(aptitudes, individuos):
     for individuo in individuos:
@@ -69,9 +69,6 @@ def probabilidad(probabilidades, probabilidades_ac, aptitudes):
         probabilidad_ac += apt / siu
         probabilidades_ac.append(probabilidad_ac)
 
-def algoritmo_genetico():
-    print("Algoritmo genetico")
-
 genera_lista_individuos(individuos)
 vector_aptitud(aptitudes, individuos)
 vector_costos(costos, individuos)
@@ -89,7 +86,6 @@ def genera_elemento_cruza():
 
 def ruleta(probabilidades_ac, individuos):
     global padre1, padre2  
-    # Hacer uso de variables globales
     # crear dos números al azar
     r1 = random.uniform(0,1)
     r2 = random.uniform(0,1)
@@ -107,7 +103,7 @@ def ruleta(probabilidades_ac, individuos):
             if probabilidades_ac[i] > r2:
                 if probabilidades_ac[i] == no_repetir:
                     r2 = random.uniform(0,1)
-                    print("Reasigno r2 para evitar cruza del mismo individuo")
+                    # print("Reasigno r2 para evitar cruza del mismo individuo")
                     break  # Salir del ciclo for y volver a empezar
                 else:
                     padre2 = individuos[i]
@@ -118,7 +114,7 @@ def ruleta(probabilidades_ac, individuos):
 def cruzar(cruza, hijo1, hijo2):
     hijo1.clear()  # Limpiar antes de cada cruce
     hijo2.clear()
-    
+
     for i in range(7):  # Ajustar para que el índice empiece en 0
         if cruza[i] <= .5:
             hijo1.append(padre1[i])
@@ -155,17 +151,10 @@ for i in range(50):
         if r1 <= .85:
             # realizar cruza y mutación
             cruza = genera_elemento_cruza()
-            
             cruzar(cruza, hijo1, hijo2)
-            
-            if restriccion(hijo1) <= 30 and hijo1.count(2) >= 3 and hijo1.count(4) >= 2:
-                individuos.append(hijo1)
-            
             mutar(hijo1)
             mutar(hijo2)
-            
-            # mientras el peso sea mayor a 30, volver a cruzar y mutar
-            while(restriccion(hijo1) > 30 or restriccion(hijo2) > 30):
+            while(restriccion(hijo1)>30 or restriccion(hijo2)>30):
                 cruza = genera_elemento_cruza()
                 cruzar(cruza, hijo1, hijo2)
                 mutar(hijo1)
@@ -175,7 +164,7 @@ for i in range(50):
                 auxiliar.append(hijo1[:])  # Usar append para agregar copias de las listas
             else:
                 auxiliar.append(padre1[:])
-            if (aptitud(hijo2) >= aptitud(padre2) ):
+            if (aptitud(hijo2)>= aptitud(padre2) ):
                 auxiliar.append(hijo2[:]) 
             else:
                 auxiliar.append(padre2[:])              
@@ -196,11 +185,10 @@ for i in range(50):
     vector_costos(costos, individuos)
     probabilidad(probabilidades, probabilidades_ac, aptitudes)
 
-    print(individuos)
-    print("fin de la generación")
+    # print(individuos)
+    # print("fin de la generación")
 
-print("generacion final: ")
-print (individuos)
+print("\nGeneracion final: \n" + str(individuos) + "\n")
 mejora = 0
 for i in range (10):
     m = aptitud(individuos[i])
@@ -208,6 +196,6 @@ for i in range (10):
         mejora = aptitud(individuos[i])
         mejor  = individuos[i]
 
-print(" el mejor resultado de la ultima generación fue :")
-print(mejor)
-print(restriccion(mejor))
+print("La mejor forma para que los hermanos lleven sus productos dentro de la mochila es: \n")
+print("Decoy Detonators:\t" + str(mejor[0]) + "\nLove Potion:\t\t" + str(mejor[1]) + "\nExtendable Ears:\t" + str(mejor[2]) + "\nSkiving Snackbox:\t" + str(mejor[3]) + "\nFever Fudge:\t\t" + str(mejor[4]) + "\nPuking Pastilles:\t" + str(mejor[5]) + "\nNosebleed Nougat:\t" + str(mejor[6]))
+print("\nCon un valor total de " + str(aptitud(mejor)) + " y un peso de " + str(restriccion(mejor)))
