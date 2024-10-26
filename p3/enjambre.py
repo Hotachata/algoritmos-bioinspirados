@@ -9,13 +9,6 @@ import math
 def random_distancia():
     return [round(random.uniform(-5, 5),2), round(random.uniform(-5, 5),2)]
 
-#   generamos la lista de particulas
-def genera_distancias_enjambre():
-    enjambre = []
-    for i in range(20):
-        enjambre.append(random_distancia())
-    return enjambre
-
 posicion = 0
 velocidad_actual = 0
 pbest = 0
@@ -77,4 +70,9 @@ def iteraciones(num_iteraciones):
         print(str(aux))
     return lista_iteraciones
 
-iteraciones(5)
+# por 20 partículas
+for j in range(20):
+    print("\n\n========================================================")
+    print("particula " + str(j+1) + "\n")
+    # 50 iteraciones
+    iteraciones(50)
