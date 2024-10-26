@@ -2,6 +2,7 @@
 # minimización de la función x^2 + y^2 + [25 * senx + seny]
 
 import random
+import math
 
 # 1. crear un enjambre de 20 particulas
 #   cada particula tiene una posición x, y
@@ -26,13 +27,18 @@ def una_particula_inicial():
     velocidad_actual = 0
     pbest = posicion
     nueva_velocidad = random_distancia()
-    
+    print(aptitud(posicion))
     # imprimimos los estados iniciales de la particula
     # print("posicion\t\t\t" + "velocidad actual\t" + "pbest\t\t\t\t" + "nueva velocidad\t\t\t")
     # print(str(posicion) + "\t\t\t" + str(velocidad_actual) + "\t\t\t" + str(pbest) + "\t\t\t" + str(nueva_velocidad))
     
     particula = [posicion, velocidad_actual, pbest, nueva_velocidad]
     return particula
+
+def aptitud(d):
+    x = d[0]
+    y = d[1]
+    return x**2 + y**2 + (25 * (math.sin(x) + math.sin(y)))
 
 def una_particula_iteracion(posicion, velocidad_actual, pbest, nueva_velocidad):
     for i in range(10):
@@ -41,7 +47,8 @@ def una_particula_iteracion(posicion, velocidad_actual, pbest, nueva_velocidad):
         # actualizamos la velocidad
         velocidad_actual = nueva_velocidad
         # actualizamos el pbest
-        
+        if aptitud(posicion) < aptitud(pbest):
+            pbest = posicion
         # actualizamos la nueva velocidad
         nueva_velocidad = random_distancia()
         
@@ -69,4 +76,4 @@ def iteraciones(num_iteraciones):
         print(str(aux))
     return lista_iteraciones
 
-iteraciones(20)
+iteraciones(5)
