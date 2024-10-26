@@ -27,18 +27,18 @@ def una_particula_inicial():
     velocidad_actual = 0
     pbest = posicion
     nueva_velocidad = random_distancia()
-    print(aptitud(posicion))
+    fitness = aptitud(posicion)
     # imprimimos los estados iniciales de la particula
     # print("posicion\t\t\t" + "velocidad actual\t" + "pbest\t\t\t\t" + "nueva velocidad\t\t\t")
     # print(str(posicion) + "\t\t\t" + str(velocidad_actual) + "\t\t\t" + str(pbest) + "\t\t\t" + str(nueva_velocidad))
     
-    particula = [posicion, velocidad_actual, pbest, nueva_velocidad]
+    particula = [posicion, velocidad_actual, pbest, nueva_velocidad, fitness]
     return particula
 
 def aptitud(d):
     x = d[0]
     y = d[1]
-    return x**2 + y**2 + (25 * (math.sin(x) + math.sin(y)))
+    return (round(x**2 + y**2 + (25 * (math.sin(x) + math.sin(y))),2))
 
 def una_particula_iteracion(posicion, velocidad_actual, pbest, nueva_velocidad):
     for i in range(10):
@@ -51,11 +51,12 @@ def una_particula_iteracion(posicion, velocidad_actual, pbest, nueva_velocidad):
             pbest = posicion
         # actualizamos la nueva velocidad
         nueva_velocidad = random_distancia()
-        
+        # actualizamos el fitness
+        fitness = aptitud(posicion)
         # imprimimos los estados de la particula
         # print(str(posicion) + "\t\t\t" + str(velocidad_actual) + "\t\t" + str(pbest) + "\t\t\t" + str(nueva_velocidad))
         
-        iteracion=[posicion, velocidad_actual, pbest, nueva_velocidad]
+        iteracion=[posicion, velocidad_actual, pbest, nueva_velocidad, fitness]
         return iteracion
 
 # 2. inicialización aleatoria de posiciones y velocidades
