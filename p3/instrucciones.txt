@@ -1,0 +1,19 @@
+Práctica de Inteligencia de Enjambre
+
+Realizar la minimización de la función x^2 + y^2 + [25 * senx + seny]
+en el intervalo de valores (-5,5) para (x, y) usando PSO.
+
+Versión de PSO: Global
+Número de partículas: 20
+Iteraciones: 50
+a= 0.8    (inercia)
+b1= 0.7  (aprendizaje local)
+b2 = 1.2   (aprendizaje global)
+
+En cada iteración imprimir:
+Posición de la partícula
+Velocidad
+pbest
+gbest
+
+Entregar programa de la práctica y realizar presentación con el profesor sobre el programa entregado el día martes 29 de octubre.
