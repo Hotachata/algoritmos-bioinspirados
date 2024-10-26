@@ -4,15 +4,9 @@
 import random
 import math
 
-# 1. crear un enjambre de 20 particulas
-#   cada particula tiene una posición x, y
+# cada particula tiene una posición x, y
 def random_distancia():
     return [round(random.uniform(-5, 5),2), round(random.uniform(-5, 5),2)]
-
-posicion = 0
-velocidad_actual = 0
-pbest = 0
-nueva_velocidad = 0
 
 # camino de una particula
 def una_particula_inicial():
@@ -52,8 +46,6 @@ def una_particula_iteracion(posicion, velocidad_actual, pbest, nueva_velocidad):
         iteracion=[posicion, velocidad_actual, pbest, nueva_velocidad, fitness]
         return iteracion
 
-# 2. inicialización aleatoria de posiciones y velocidades
-
 def iteraciones(num_iteraciones):
     # creamos una particula
     p=una_particula_inicial()
@@ -73,6 +65,6 @@ def iteraciones(num_iteraciones):
 # por 20 partículas
 for j in range(20):
     print("\n\n========================================================")
-    print("particula " + str(j+1) + "\n")
+    print("\nparticula " + str(j+1) + "\n")
     # 50 iteraciones
     iteraciones(50)
