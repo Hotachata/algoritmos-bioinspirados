@@ -18,7 +18,6 @@ def una_particula_inicial():
     # imprimimos los estados iniciales de la particula
     # print("posicion\t\t\t" + "velocidad actual\t" + "pbest\t\t\t\t" + "nueva velocidad\t\t\t")
     # print(str(posicion) + "\t\t\t" + str(velocidad_actual) + "\t\t\t" + str(pbest) + "\t\t\t" + str(nueva_velocidad))
-    
     particula = [posicion, velocidad_actual, pbest, nueva_velocidad, fitness]
     return particula
 
@@ -26,6 +25,17 @@ def aptitud(d):
     x = d[0]
     y = d[1]
     return (round(x**2 + y**2 + (25 * (math.sin(x) + math.sin(y))),2))
+
+def una_nueva_velocidad(velocidad_actual, posicion, pbest, gbest):
+    nueva_velocidad=[]
+    nueva_velocidad.clear()
+    r1 = random.uniform(0, 1)
+    r2 = random.uniform(0, 1)
+    for i in range(0,2):
+        # actualizamos la velocidad
+        _ = round((0.8 * velocidad_actual[i]) + (0.7 * r1 * (pbest[i] - posicion[i])) + (1.2 * r2 * (gbest[i] - posicion[i])),2)
+        nueva_velocidad.append(_)
+    return nueva_velocidad
 
 def una_particula_iteracion(posicion, velocidad_actual, pbest, nueva_velocidad):
     for i in range(10):
@@ -60,11 +70,14 @@ def iteraciones(num_iteraciones):
         p[2]=aux[2]
         p[3]=aux[3]
         print(str(aux))
+        aux.clear()
     return lista_iteraciones
 
 # por 20 partículas
-for j in range(20):
+for j in range(0):
     print("\n\n========================================================")
     print("\nparticula " + str(j+1) + "\n")
     # 50 iteraciones
     iteraciones(50)
+
+print(una_nueva_velocidad([1,2], [4,5], [7,8], [10,11]))
