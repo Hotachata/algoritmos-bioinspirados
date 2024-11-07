@@ -24,7 +24,7 @@ t5=[0.2, 0.2, 0.2, 0.2, 0, 0.2]
 t6=[0.2, 0.2, 0.2, 0.2, 0.2, 0]
 feromonas=[t1, t2, t3, t4, t5, t6]
 
-def iteraciones(vector_costos, vector_feromonas):
+def probabilidades(vector_costos, vector_feromonas):
     # calculamos los caminos que podría tomar la hormiga
     numeradores=[] # numeradores de la formula
     denominador=0 # denominador de la formula
@@ -39,4 +39,4 @@ def iteraciones(vector_costos, vector_feromonas):
         P.append(probabilidad)
     return P
 
-print(iteraciones(c1, t1))
+print(probabilidades(c1, t1))
