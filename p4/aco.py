@@ -15,3 +15,24 @@ c6=[21, 18, 11, 10, 21, 0]
 ciudades=[c1, c2, c3, c4, c5, c6]
 vista_ciudades=np.array(ciudades)
 print("\nDistancias entre las ciudades:\n", vista_ciudades,"\n")
+# matriz inicial de feromonas
+t1=[0, 0.2, 0.2, 0.2, 0.2, 0.2]
+t2=[0.2, 0, 0.2, 0.2, 0.2, 0.2]
+t3=[0.2, 0.2, 0, 0.2, 0.2, 0.2]
+t4=[0.2, 0.2, 0.2, 0, 0.2, 0.2]
+t5=[0.2, 0.2, 0.2, 0.2, 0, 0.2]
+t6=[0.2, 0.2, 0.2, 0.2, 0.2, 0]
+feromonas=[t1, t2, t3, t4, t5, t6]
+
+def iteraciones(vector_costos, vector_feromonas):
+    # calculamos los caminos que podría tomar la hormiga
+    P=[] # probabilidad de tomar un camino
+    Pacum=0 # probabilidad acumulada
+    for i in range(len(vector_costos)):
+        if vector_costos[i]!=0:
+            aux=(vector_feromonas[i]**a)*((1/vector_costos[i])**b)
+            P.append(aux)
+            Pacum=Pacum+aux
+    return P, Pacum
+
+print(iteraciones(c1, t1))
