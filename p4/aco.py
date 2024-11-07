@@ -24,19 +24,27 @@ t5=[0.2, 0.2, 0.2, 0.2, 0, 0.2]
 t6=[0.2, 0.2, 0.2, 0.2, 0.2, 0]
 feromonas=[t1, t2, t3, t4, t5, t6]
 
+# def ruleta():
+    
+
 def probabilidades(vector_costos, vector_feromonas):
     # calculamos los caminos que podría tomar la hormiga
     numeradores=[] # numeradores de la formula
     denominador=0 # denominador de la formula
     P=[] # vector de probabilidades
+    Pac=[] # vector de probabilidades acumuladas
+    aux=0
     for i in range(len(vector_costos)):
         if vector_costos[i]!=0:
             numerador=(vector_feromonas[i]**a)*((1/vector_costos[i])**b)
             numeradores.append(numerador) # tenemos una lista de numeradores
-            denominador=denominador+numerador # y un solo denominador
+            denominador+=numerador # y un solo denominador
     for j in range(len(numeradores)):
         probabilidad=numeradores[j]/denominador
         P.append(probabilidad)
-    return P
+    for k in P:
+        aux+=k
+        Pac.append(aux)
+    return Pac
 
 print(probabilidades(c1, t1))
