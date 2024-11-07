@@ -1,0 +1,10 @@
+1. Usar una hormiga por nodo, todas las ciudades deben ser visitadas por las hormigas y 
+cada hormiga debe regresar al nodo por el que salio
+2. Usar los parámetros 
+    p=0.5
+    Q=1
+    a=1.5
+    b=0.8
+3. Relizar 50 iteraciones
+4. Usar ruleta para seleccionar el mejor nodo para que se mueva la hormiga
+5. La inicializacion de las feromonas es libre pero no debe ser 0 (ej. entre 0 y 1)
