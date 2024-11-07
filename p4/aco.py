@@ -3,29 +3,34 @@ p=0.5
 Q=1
 a=1.5
 b=0.8
-# numpy
+# bibliotecas
+import random
 import numpy as np
 # matriz de ciudades con costos
-c1=[0, 6, 9, 17, 13, 21]
-c2=[6, 0, 19, 21, 12, 18]
-c3=[9, 19, 0, 20, 23, 11]
-c4=[17, 21, 20, 0, 15, 10]
-c5=[13, 12, 23, 15, 0, 21]
-c6=[21, 18, 11, 10, 21, 0]
-ciudades=[c1, c2, c3, c4, c5, c6]
+c0=[0, 6, 9, 17, 13, 21]
+c1=[6, 0, 19, 21, 12, 18]
+c2=[9, 19, 0, 20, 23, 11]
+c3=[17, 21, 20, 0, 15, 10]
+c4=[13, 12, 23, 15, 0, 21]
+c5=[21, 18, 11, 10, 21, 0]
+ciudades=[c0, c1, c2, c3, c4, c5]
 vista_ciudades=np.array(ciudades)
 print("\nDistancias entre las ciudades:\n", vista_ciudades,"\n")
 # matriz inicial de feromonas
-t1=[0, 0.2, 0.2, 0.2, 0.2, 0.2]
-t2=[0.2, 0, 0.2, 0.2, 0.2, 0.2]
-t3=[0.2, 0.2, 0, 0.2, 0.2, 0.2]
-t4=[0.2, 0.2, 0.2, 0, 0.2, 0.2]
-t5=[0.2, 0.2, 0.2, 0.2, 0, 0.2]
-t6=[0.2, 0.2, 0.2, 0.2, 0.2, 0]
-feromonas=[t1, t2, t3, t4, t5, t6]
+t0=[0, 0.2, 0.2, 0.2, 0.2, 0.2]
+t1=[0.2, 0, 0.2, 0.2, 0.2, 0.2]
+t2=[0.2, 0.2, 0, 0.2, 0.2, 0.2]
+t3=[0.2, 0.2, 0.2, 0, 0.2, 0.2]
+t4=[0.2, 0.2, 0.2, 0.2, 0, 0.2]
+t5=[0.2, 0.2, 0.2, 0.2, 0.2, 0]
+feromonas=[t0, t1, t2, t3, t4, t5]
 
-# def ruleta():
-    
+def ruleta(Pac, vector_costos):
+    # crea un random r
+    r = random.uniform(0,1)
+    for i in Pac:
+        if Pac[i] >= r:
+            return i
 
 def probabilidades(vector_costos, vector_feromonas):
     # calculamos los caminos que podría tomar la hormiga
@@ -47,4 +52,42 @@ def probabilidades(vector_costos, vector_feromonas):
         Pac.append(aux)
     return Pac
 
-print(probabilidades(c1, t1))
+# la funcion [iteraciones] esta pensada para ir dentro de un ciclo for de 0 
+# a 5, esto para hacer las iteraciones de las hormigas al mismo tiempo
+def iteraciones(nodo_inicial):
+    vc=ciudades[nodo_inicial] # establecemos un vector de costos segun el nodo
+    vf=feromonas[nodo_inicial] # vector de feromonas
+    print(vc)
+    print(vf)
+    
+    Pac=probabilidades(vc, vf) # vector de probabilidades acumuladas
+    print(Pac)
+    
+    vpendientes = [0, 1, 2, 3, 4, 5]
+    vpendientes.remove(nodo_inicial) # eliminamos el nodo inicial de la lista de pendientes
+    print(vpendientes)
+    
+    # creamos una lista vacia para ir guardando los nodos que visitamos
+    vcamino=[nodo_inicial]
+    print(vcamino)
+    
+    # elegimos un nodo al azar con ruleta
+    # suponiendo que ruleta nos regrese un entero que represente un nodo
+    # nos movemos a ése nodo y lo agregamos a la lista tabu
+    
+    for i in vpendientes:
+        # nodo_nuevo=ruleta(...)
+        nodo_nuevo=4
+        vpendientes.remove(nodo_nuevo)
+        vcamino.append(nodo_nuevo)
+        
+        vc=ciudades[nodo_nuevo]
+        vf=feromonas[nodo_nuevo]
+        
+        for j in vcamino:
+            vc.pop(vcamino[j])
+            vf.pop(vcamino[j])
+        
+        Pac=probabilidades(vc, vf)
+    
+print(iteraciones(1))
