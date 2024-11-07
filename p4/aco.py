@@ -26,13 +26,17 @@ feromonas=[t1, t2, t3, t4, t5, t6]
 
 def iteraciones(vector_costos, vector_feromonas):
     # calculamos los caminos que podría tomar la hormiga
-    P=[] # probabilidad de tomar un camino
-    Pacum=0 # probabilidad acumulada
+    numeradores=[] # numeradores de la formula
+    denominador=0 # denominador de la formula
+    P=[] # vector de probabilidades
     for i in range(len(vector_costos)):
         if vector_costos[i]!=0:
-            aux=(vector_feromonas[i]**a)*((1/vector_costos[i])**b)
-            P.append(aux)
-            Pacum=Pacum+aux
-    return P, Pacum
+            numerador=(vector_feromonas[i]**a)*((1/vector_costos[i])**b)
+            numeradores.append(numerador) # tenemos una lista de numeradores
+            denominador=denominador+numerador # y un solo denominador
+    for j in range(len(numeradores)):
+        probabilidad=numeradores[j]/denominador
+        P.append(probabilidad)
+    return P
 
 print(iteraciones(c1, t1))
