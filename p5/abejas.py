@@ -7,6 +7,7 @@ linf_lp = 3
 linf_ss = 2
 iteraciones = 50 # limite de iteraciones
 lim = 5 # limite de evaluaciones
+nobreras = 5 # numero de obreras
 
 # población inicial aleatoria
 def poblacion_inicial(linf, lsup):
@@ -15,7 +16,7 @@ def poblacion_inicial(linf, lsup):
 # inicializamos las abejas
 def inicializa_abejas():
     abejas = []
-    for i in range(0, 5): # 20 abejas
+    for i in range(0, len(nobreras)): # 20 abejas
         aux = []
         # cada variable es una solución, son siete soluciones
         aux.append(poblacion_inicial(linf, lsup)) # sol 1
@@ -27,4 +28,19 @@ def inicializa_abejas():
         print(aux)
     return abejas
 
-inicializa_abejas()
+def aptitud():
+    pass
+
+def fase_obrera():
+    abejas = inicializa_abejas() # inicializamos la colonia de abejas (20)
+    for i in range(0, len(abejas)):
+        x = abejas[i] # extraemos la abeja con la que vamos a trabajar
+        abeja_random = random.uniform(0,len(abejas)) # numero de la abeja aleatoria
+        k = abejas[abeja_random] # abeja aleatoria
+        
+        # por cada abeja seleccionamos una fuente de alimento
+        j = random.uniform(0,6) # número aleatorio para modificar (posición)
+        vmodif = x[j] + random.uniform(-1,1) * (x[j] - k[j]) # variable modificada
+        
+        aux = x
+        aux[j] = vmodif # actualizamos la variable modificada en un auxiliar
