@@ -5,7 +5,8 @@ lsup=10
 linf=0
 linf_lp = 3
 linf_ss = 2
-lim = 50 # limite de iteraciones
+iteraciones = 50 # limite de iteraciones
+lim = 5 # limite de evaluaciones
 
 # población inicial aleatoria
 def poblacion_inicial(linf, lsup):
@@ -16,7 +17,7 @@ def inicializa_abejas():
     abejas = []
     for i in range(0, 5): # 20 abejas
         aux = []
-        # son siete soluciones
+        # cada variable es una solución, son siete soluciones
         aux.append(poblacion_inicial(linf, lsup)) # sol 1
         aux.append(poblacion_inicial(linf_lp, lsup)) # sol 2
         aux.append(poblacion_inicial(linf_ss, lsup)) # sol 3
