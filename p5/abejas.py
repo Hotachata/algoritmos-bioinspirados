@@ -33,6 +33,8 @@ def aptitud():
 
 def fase_obrera():
     abejas = inicializa_abejas() # inicializamos la colonia de abejas (20)
+    
+    # generamos una nueva solución
     for i in range(0, len(abejas)):
         x = abejas[i] # extraemos la abeja con la que vamos a trabajar
         abeja_random = random.uniform(0,len(abejas)) # numero de la abeja aleatoria
