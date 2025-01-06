@@ -1,0 +1,17 @@
+﻿MATERIA,PROFESOR,lunes_i,lunes_f,martes_i,martes_f,miercoles_i,miercoles_f,jueves_i,jueves_f,viernes_i,viernes_f,prioridad
+Redes Neuronales,Camacho Vazquez Vanessa Alejandra,12:00,13:30,x,x,12:00,13:30,12:00,13:30,x,x,500
+Ingenieria de Software Para Sistema Inteligentes,Maldonado Castillo Idalia,07:00,08:30,x,x,x,x,07:00,08:30,08:30,10:00,500
+Metodologia de la Investigacion y Divulgacion Cientifica,Martinez Acosa Lilian,10:30,12:00,08:30,10:00,x,x,10:30,12:00,x,x,4
+Aplicaciones de Lenguaje Natural,Moreno Galvan Elizabeth,x,x,12:00,13:30,13:30,15:00,x,x,12:00,13:30,10
+Aplicaciones de Inteligencia Artificial en Sistemas Embeidos,Castillo Martinez Miguel Angel,x,x,10:30,12:00,10:30,12:00,x,x,10:30,12:00,3
+Redes Neuronales,Vasquez Gomez Juan Irving,10:30,08:30,08:30,10:00,x,x,10:30,12:00,x,x,100
+Ingenieria de Software Para Sistema Inteligentes,Carreto Arellano Chadwick,x,x,07:00,08:30,07:00,08:30,x,x,07:00,08:30,9
+Metodologia de la Investigacion y Divulgacion Cientifica,Herrera Delgado Lizbeth Berenice,12:00,13:30,x,x,12:00,13:30,12:00,13:30,x,x,8
+Aplicaciones de Lenguaje Natural,Ocampo Botello Fabiola,08:30,10:00,x,x,08:30,10:00,13:30,15:00,x,x,9
+Aplicaciones de Inteligencia Artificial en Sistemas Embeidos,Roman Godinez Rodrigo Francisico,x,x,12:00,13:30,13:30,15:00,08:30,10:00,12:00,13:30,7.1
+Procesamiento de Lenguaje Natural,Ortiz Castillo Marco Antonio,18:30,20:00,16:30,18:00,x,x,18:30,20:00,x,x,8
+Analitica Avanzada de Datos,Escalante Notario Enrique,x,x,15:00,16:30,15:00,16:30,x,x,x,x,7
+Modelado Predictivo,Diaz Sanchez Hugo,15:00,16:30,x,x,x,x,15:00,16:30,15:00,16:30,6
+Analisis de Series de Tiempo,Reyes Vera Abdiel,16:30,18:00,x,x,16:30,18:00,x,x,16:30,18:00,10
+Ciberseguridad,Salinas Rosales Moises,13:30,15:00,13:30,15:00,x,x,16:30,18:00,x,x,4
+,,,,,,,,x,x,x,x,6
